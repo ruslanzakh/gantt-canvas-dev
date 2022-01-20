@@ -1,0 +1,3 @@
+[submodule "src/gantt"]
+	path = src/gantt
+	url = git@github.com:ruslanzakh/gantt-canvas.git

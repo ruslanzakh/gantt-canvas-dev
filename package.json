@@ -1,0 +1,14 @@
+{
+  "name": "gantt-canvas-dev",
+  "version": "1.0.0",
+  "description": "Demo gantt-canvas plugin",
+  "scripts": {
+    "dev": "parcel src/index.html --out-dir dev"
+  },
+  "author": "Ruslan Zakharov",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.5"
+  }
+}
