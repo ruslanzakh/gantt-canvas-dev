@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Demo gantt-canvas plugin",
   "scripts": {
-    "dev": "parcel src/index.html --out-dir dev"
+    "dev": "parcel src/index.html --out-dir dev",
+    "submodule-init": "git submodule init && git submodule update"
   },
   "author": "Ruslan Zakharov",
   "license": "MIT",
