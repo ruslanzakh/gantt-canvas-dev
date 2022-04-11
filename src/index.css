@@ -7,9 +7,23 @@ html, body {
 	height: 100%;
 	margin: 0;
 	padding: 5%;
-	background: #ccc;
+	background: var(--grey);
 }
 #app {
 	width: 100%;
 	height: 100%;
+}
+
+:root {
+	--red: red;
+	--green: green;
+	--black: black;
+	--grey: #ccc;
+	--orange: orange;
+	--white: white;
+}
+
+:root[dark-theme] {
+	--white: black;
+	--grey: #333;
 }

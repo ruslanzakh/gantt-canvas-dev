@@ -127,6 +127,7 @@ function getTasks() {
 			end_date_ts,
 			underline: true,
 			all_day: Math.random() >= 0.5,
+			background: 'var(--orange)',
 			next_ids: getNextIds(tasks, end_date_ts)
 		}
 		tasks.push(task)
@@ -143,9 +144,9 @@ const gantt = new Gantt('#app', {
 	handleTaskClick: async (task) => {
 		console.log('handleTaskClick', task);
 	},
-	viewMode: 'day',
-	showTime: true,
 	// renderAllTasksFromStart: false,
+	// viewMode: 'quarter-day',
+	showTime: true,
 	dayWeekendBackground: '#fbf5ff',
 	// lang: 'es',
 	monthTitleFont: '400 20px Roboto',
@@ -165,12 +166,21 @@ const gantt = new Gantt('#app', {
 			'Diciembre'
 		],
 	},
+	lang: 'es',
 	showDayWeekday: true,
 	weekdayColor: 'red',
-	weekdayFontLineHeight: 10,
-	weekdayFontSize: 20,
+	dayTodayBackground: 'red',
+	weekdayFontSize: 12,
 	weekdayWeekendColor: 'blue',
 	showMonthFromStartOnDayView: true,
+	dayHeaderBackground: 'yellow',
+	dayHeaderTodayBackground: 'var(--red)',
+	dayHeaderWeekendBackground: 'var(--green)',
+	dayHeight: 40,
+	taskDefaultBackground: 'var(--grey)',
+	background: 'var(--white)',
+	rowEvenBackground: 'var(--white)',
+	rowOddBackground: 'var(--white)',
 });
 
 const scrollToday = document.getElementById('scroll-today');
@@ -251,5 +261,17 @@ if(scale) {
 	scale.addEventListener('change', function(event) {
 		const value = Number(event.target.value)
 		gantt.updateScale(value);
+	})
+}
+
+const toggleTheme = document.getElementById('toggle-theme');
+if(toggleTheme) {
+	toggleTheme.addEventListener('click', function() {
+		const root = document.querySelector(':root')
+		if(!root) return;
+		const dark = root.getAttribute('dark-theme');
+		if(dark) root.removeAttribute('dark-theme');
+		else root.setAttribute('dark-theme', 'true');
+		gantt.updateColors();
 	})
 }
