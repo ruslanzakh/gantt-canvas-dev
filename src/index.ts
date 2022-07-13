@@ -39,7 +39,7 @@ const tasks = [
 		all_day: true,
 		start_date_ts: 1632670084597,
 		end_date_ts: 1633163321049,
-		next_ids: []
+		next_ids: [],
 	},
 	{
 		id: 'task5',
@@ -47,7 +47,7 @@ const tasks = [
 		start_date_ts: 1633163321049,
 		end_date_ts: 1633163321049,
 		all_day: true,
-		next_ids: ['task4']
+		next_ids: ['task4'],
 	},
 	{
 		id: 'task6',
@@ -87,7 +87,7 @@ const tasks = [
 		next_ids: [],
 		all_day: true,
 	},
-]
+];
 
 // 1577912400000
 // 1609448400000
@@ -98,26 +98,29 @@ const getStartDateTs = (min = 1609448400000, max = 1640984400000) => {
 	const diff = max - min;
 	const random = Math.floor(Math.random() * diff);
 	return min + random;
-}
+};
 const getNextIds = (tasks, end_date_ts: number) => {
 	let count = Math.floor(Math.random() * 3);
 	const data = [];
-	if(count === 0) return data;
+	if (count === 0) return data;
 	const filteredTasks = tasks.filter(task => task.end_date_ts >= end_date_ts);
-	if(filteredTasks.length === 0) return data;
+	if (filteredTasks.length === 0) return data;
 	do {
-		const randomIndex =  Math.floor(Math.random() * (filteredTasks.length - 1));
+		const randomIndex = Math.floor(
+			Math.random() * (filteredTasks.length - 1)
+		);
 		data.push(filteredTasks[randomIndex].id);
 		count--;
-	} while(count > 0);
+	} while (count > 0);
 	return data;
-}
+};
 
 function getTasks() {
 	const tasks = [];
-	for(let i = 0; i <= 100; i++ ){
+	for (let i = 0; i <= 100; i++) {
 		const start_date_ts = getStartDateTs();
-		const end_date_ts = start_date_ts + (Math.floor(Math.random() * 5) * 24 * 60 * 60 * 1000)
+		const end_date_ts =
+			start_date_ts + Math.floor(Math.random() * 5) * 24 * 60 * 60 * 1000;
 
 		const task = {
 			id: `task_${i}`,
@@ -127,9 +130,9 @@ function getTasks() {
 			end_date_ts,
 			underline: true,
 			all_day: Math.random() >= 0.5,
-			next_ids: getNextIds(tasks, end_date_ts)
-		}
-		tasks.push(task)
+			next_ids: getNextIds(tasks, end_date_ts),
+		};
+		tasks.push(task);
 	}
 	return tasks;
 }
@@ -137,10 +140,10 @@ const gantt = new Gantt('#app', {
 	tasks: tasks,
 	// tasks: getTasks().sort((a, b) => a.start_date_ts - b.start_date_ts),
 	tasks: getTasks(),
-	handleChange: async (tasks) => {
+	handleChange: async tasks => {
 		console.log(tasks);
 	},
-	handleTaskClick: async (task) => {
+	handleTaskClick: async task => {
 		console.log('handleTaskClick', task);
 	},
 	viewMode: 'day',
@@ -162,7 +165,7 @@ const gantt = new Gantt('#app', {
 			'Septiembre',
 			'Octubre',
 			'Noviembre',
-			'Diciembre'
+			'Diciembre',
 		],
 	},
 	showDayWeekday: true,
@@ -174,82 +177,84 @@ const gantt = new Gantt('#app', {
 });
 
 const scrollToday = document.getElementById('scroll-today');
-if(scrollToday) {
-	scrollToday.addEventListener('click', function() {
+if (scrollToday) {
+	scrollToday.addEventListener('click', function () {
 		gantt.scrollToToday(true);
-	})
+	});
 }
 const scrollTask = document.getElementById('scroll-task');
-if(scrollTask) {
-	scrollTask.addEventListener('click', function() {
+if (scrollTask) {
+	scrollTask.addEventListener('click', function () {
 		gantt.scrollToTask('task_100');
-	})
+	});
 }
 const viewDay = document.getElementById('view-day');
-if(viewDay) {
-	viewDay.addEventListener('click', function() {
+if (viewDay) {
+	viewDay.addEventListener('click', function () {
 		gantt.updateViewMode('day');
-	})
+	});
 }
 const viewHalfDay = document.getElementById('view-half-day');
-if(viewHalfDay) {
-	viewHalfDay.addEventListener('click', function() {
+if (viewHalfDay) {
+	viewHalfDay.addEventListener('click', function () {
 		gantt.updateViewMode('half-day');
-	})
+	});
 }
 const viewQuarterDay = document.getElementById('view-quarter-day');
-if(viewQuarterDay) {
-	viewQuarterDay.addEventListener('click', function() {
+if (viewQuarterDay) {
+	viewQuarterDay.addEventListener('click', function () {
 		gantt.updateViewMode('quarter-day');
-	})
+	});
 }
 const ThreeHoursDay = document.getElementById('view-three-hours');
-if(ThreeHoursDay) {
-	ThreeHoursDay.addEventListener('click', function() {
+if (ThreeHoursDay) {
+	ThreeHoursDay.addEventListener('click', function () {
 		gantt.updateViewMode('three-hours');
-	})
+	});
 }
 const Hour = document.getElementById('view-hour');
-if(Hour) {
-	Hour.addEventListener('click', function() {
+if (Hour) {
+	Hour.addEventListener('click', function () {
 		gantt.updateViewMode('hour');
-	})
+	});
 }
 const viewWeek = document.getElementById('view-week');
-if(viewWeek) {
-	viewWeek.addEventListener('click', function() {
+if (viewWeek) {
+	viewWeek.addEventListener('click', function () {
 		gantt.updateViewMode('week');
-	})
+	});
 }
 const viewMonth = document.getElementById('view-month');
-if(viewMonth) {
-	viewMonth.addEventListener('click', function() {
+if (viewMonth) {
+	viewMonth.addEventListener('click', function () {
 		gantt.updateViewMode('month');
-	})
+	});
 }
 let isLoading = false;
 const progressToggle = document.getElementById('progress-toggle');
-if(progressToggle) {
-	progressToggle.addEventListener('click', function() {
+if (progressToggle) {
+	progressToggle.addEventListener('click', function () {
 		isLoading = !isLoading;
 		gantt.updateIsLoading(isLoading);
-	})
+	});
 }
 
-const progressToggleTimeout = document.getElementById('progress-toggle-timeout');
-if(progressToggleTimeout) {
-	progressToggleTimeout.addEventListener('click', function() {
+const progressToggleTimeout = document.getElementById(
+	'progress-toggle-timeout'
+);
+if (progressToggleTimeout) {
+	progressToggleTimeout.addEventListener('click', function () {
 		setTimeout(() => {
 			isLoading = !isLoading;
 			gantt.updateIsLoading(isLoading);
 		}, 5000);
-	})
+	});
 }
 
 const scale = document.getElementById('scale');
-if(scale) {
-	scale.addEventListener('change', function(event) {
-		const value = Number(event.target.value)
+if (scale) {
+	scale.addEventListener('change', function (event) {
+		const value = Number(event.target.value);
 		gantt.updateScale(value);
-	})
+	});
 }

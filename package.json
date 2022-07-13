@@ -3,12 +3,31 @@
   "version": "1.0.0",
   "description": "Demo gantt-canvas plugin",
   "scripts": {
-    "dev": "parcel src/index.html --out-dir dev"
+    "dev": "parcel src/index.html --out-dir dev",
+    "eslint": "eslint --fix --resolve-plugins-relative-to . -c .eslintrc.js --ext .ts .",
+    "prettier": "prettier --write ./src",
+    "prepare": "husky install",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "./src/**/*.ts": [
+      "eslint --fix -c .eslintrc.js --ext .ts",
+      "prettier --write ./src"
+    ]
   },
   "author": "Ruslan Zakharov",
   "license": "MIT",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "@typescript-eslint/typescript-estree": "^5.30.6",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "parcel-bundler": "^1.12.5",
+    "prettier": "^2.7.1",
     "typescript": "^4.3.5"
   }
 }
